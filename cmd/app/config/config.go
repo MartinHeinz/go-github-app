@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/google/go-github/v41/github"
 	"github.com/spf13/viper"
-	"gorm.io/gorm"
 )
 
 // Config is global object that holds all application level variables.

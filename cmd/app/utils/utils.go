@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/MartinHeinz/go-github-app/cmd/app/config"
 	"github.com/bradleyfalzon/ghinstallation/v2"
 	"github.com/google/go-github/v41/github"
 	"log"

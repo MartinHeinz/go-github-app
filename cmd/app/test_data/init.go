@@ -1,8 +1,8 @@
 package test_data
 
 import (
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
+	"github.com/MartinHeinz/go-github-app/cmd/app/config"
+	"github.com/MartinHeinz/go-github-app/cmd/app/utils"
 )
 
 // Initializes application config and SQLite database used for testing

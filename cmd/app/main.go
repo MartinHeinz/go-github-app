@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/MartinHeinz/go-github-app/cmd/app/config"
+	"github.com/MartinHeinz/go-github-app/cmd/app/utils"
+	"github.com/MartinHeinz/go-github-app/cmd/app/webhooks"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 )
 
 func main() {
@@ -30,7 +31,7 @@ func main() {
 
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("/github/payload", apis.ConsumeEvent)
+		v1.POST("/github/payload", webhooks.ConsumeEvent)
 	}
 
 	utils.InitGitHubClient()
