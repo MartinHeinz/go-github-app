@@ -11,6 +11,13 @@ import (
 	"net/http"
 )
 
+const (
+	Install     string = "installation"
+	Ping               = "ping"
+	Push               = "push"
+	PullRequest        = "pull_request"
+)
+
 func VerifySignature(payload []byte, signature string) bool {
 	key := hmac.New(sha256.New, []byte(config.Config.GitHubWebhookSecret))
 	key.Write([]byte(string(payload)))
@@ -31,6 +38,17 @@ func ConsumeEvent(c *gin.Context) {
 	}
 
 	event := c.GetHeader("X-GitHub-Event")
+
+	switch event {
+	case Install:
+		log.Printf("Consume %s", Install)
+	case Ping:
+		log.Printf("Consume %s", Ping)
+	case Push:
+		log.Printf("Consume %s", Push)
+	case PullRequest:
+		log.Printf("Consume %s", PullRequest)
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"event": event,
