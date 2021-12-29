@@ -11,12 +11,21 @@ import (
 	"net/http"
 )
 
+type Event string
+
 const (
-	Install     string = "installation"
-	Ping               = "ping"
-	Push               = "push"
-	PullRequest        = "pull_request"
+	Install     Event = "installation"
+	Ping              = "ping"
+	Push              = "push"
+	PullRequest       = "pull_request"
 )
+
+var Events = []Event{
+	Install,
+	Ping,
+	Push,
+	PullRequest,
+}
 
 func VerifySignature(payload []byte, signature string) bool {
 	key := hmac.New(sha256.New, []byte(config.Config.GitHubWebhookSecret))
@@ -39,15 +48,15 @@ func ConsumeEvent(c *gin.Context) {
 
 	event := c.GetHeader("X-GitHub-Event")
 
-	switch event {
-	case Install:
-		log.Printf("Consume %s", Install)
-	case Ping:
-		log.Printf("Consume %s", Ping)
-	case Push:
-		log.Printf("Consume %s", Push)
-	case PullRequest:
-		log.Printf("Consume %s", PullRequest)
+	found := false
+	for _, e := range Events {
+		if string(e) == event {
+			log.Printf("Consume %s", e)
+			found = true
+		}
+	}
+	if !found {
+		log.Printf("Unsupported event: %s", event)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
