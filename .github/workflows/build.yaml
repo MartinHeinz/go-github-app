@@ -1,0 +1,20 @@
+name: Build, Test, Lint
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Go
+        uses: actions/setup-go@v2
+      - name: Run Makefile build for Development
+        run: |
+          export GO111MODULE=on
+          go mod vendor
+          make build
+          test -f bin/linux_amd64/app
+          make all-container
+          docker images | grep "^ghcr.io/martinheinz/go-github-app/app.*__linux_amd64"
+          make ci

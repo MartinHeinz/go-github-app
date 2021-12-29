@@ -1,0 +1,25 @@
+{
+  "action": "created",
+  "installation": {
+    "id": "...",
+    "app_id": "...",
+    "app_slug": "...",
+    "target_type": "User",
+    "permissions": {
+      "contents": "read",
+      "metadata": "read"
+    },
+    "events": [
+      "fork",
+      "watch"
+    ],
+    "created_at": "2021-12-21T12:59:47.000+01:00",
+    "updated_at": "2021-12-21T12:59:48.000+01:00"
+  },
+  "repositories": [],
+  "requester": null,
+  "sender": {
+    "login": "...",
+    "type": "User"
+  }
+}
