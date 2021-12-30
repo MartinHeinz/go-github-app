@@ -1,1 +1,1 @@
-github_webhook_secret: "verysecret"
+github_webhook_secret: "WEBHOOK_SECRET"
