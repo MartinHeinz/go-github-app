@@ -10,7 +10,7 @@ import (
 
 func TestGithubVerifySignature(t *testing.T) {
 	payload, _ := ioutil.ReadFile("/github_installation_input_t1.json")
-	signature := "sha256=28377c28d5e1cabe15e0743189855e0fd04e4ad4643083d48608bd0e0ddfaa1d"
+	signature := "sha256=d77718c0b2f2a9ae94d84846ec2034914042facb274a3b0a23d4140cb2f1c0df"
 
 	result := VerifySignature(payload, signature)
 	assert.True(t, result)
@@ -26,7 +26,7 @@ func TestGithub(t *testing.T) {
 			"/github/payload",
 			map[string]string{
 				"X-GitHub-Event":      "push",
-				"X-Hub-Signature-256": "sha256=f86efe4b911eeb240996958e9877fe294c5057cb2a433b5f8d161678e19a52af",
+				"X-Hub-Signature-256": "sha256=412e84d3fc669078574abc0f9a7dcb1e3806182d4c333bdc8e09404523eb4a28",
 			},
 			path + "/github_push_input_t1.json",
 			ConsumeEvent,
