@@ -19,8 +19,8 @@ NC='\033[0m' # No Color
 
 echo -e "\n${BLUE}Renaming variables and files...${NC}\n"
 
-sed -i s~APP_ID~$APP_ID~g cmd/app/utils/utils.go
-sed -i s~INSTALLATION_ID~$INSTALLATION_ID~g cmd/app/utils/utils.go
+sed -i s~12345~$APP_ID~g cmd/app/utils/utils.go
+sed -i s~123456789~$INSTALLATION_ID~g cmd/app/utils/utils.go
 sed -i s~WEBHOOK_SECRET~$WEBHOOK_SECRET~g config/server.yaml
 sed -i s~$DUMMY_REGISTRY~$REGISTRY~g Makefile
 
@@ -37,4 +37,4 @@ echo -e "\n${BLUE}Test: make build${NC}\n"
 make build
 
 # Usage:
-# ./configure_project.sh APP_ID="12345" INSTALLATION_ID="12345678" WEBHOOK_SECRET="verysecret" KEY_PATH="./github_key.pem" REGISTRY="ghcr.io/<GITHUB_USERNAME>/go-github-app"
+# ./configure_project.sh APP_ID="54321" INSTALLATION_ID="987654321" WEBHOOK_SECRET="verysecret" KEY_PATH="./github_key.pem" REGISTRY="ghcr.io/<GITHUB_USERNAME>/go-github-app"
