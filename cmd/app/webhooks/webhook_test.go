@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-type apiTestCase struct {
+type webhookTestCase struct {
 	tag              string
 	method           string
 	urlToServe       string
@@ -44,7 +44,7 @@ func testWebhook(router *gin.Engine, method string, urlToServe string, urlToHit 
 
 // Used to run suite (list) of test cases. It checks JSON response is same as expected data in test case file.
 // All test expected test case responses are stored in `test_data/test_case_data` folder in format `<suite_name>_t<number>.json`
-func runWebhookTests(t *testing.T, tests []apiTestCase) {
+func runWebhookTests(t *testing.T, tests []webhookTestCase) {
 	for _, test := range tests {
 		router := newRouter()
 		var body []byte
