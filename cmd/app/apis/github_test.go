@@ -16,23 +16,21 @@ func TestGithubGetPullRequests(t *testing.T) {
 		"PR number one",
 		"PR number three",
 	}
-	stateOpen := "open"
-	stateClosed := "closed"
 	closedPullRequestTitle := "PR number two"
 	mockedHTTPClient := mock.NewMockedHTTPClient(
 		mock.WithRequestMatch(
 			mock.GetReposPullsByOwnerByRepo,
 			[]github.PullRequest{
-				github.PullRequest{
-					State: &stateOpen,
+				{
+					State: github.String("open"),
 					Title: &expectedTitles[0],
 				},
-				github.PullRequest{
-					State: &stateClosed,
+				{
+					State: github.String("closed"),
 					Title: &closedPullRequestTitle,
 				},
-				github.PullRequest{
-					State: &stateOpen,
+				{
+					State: github.String("open"),
 					Title: &expectedTitles[1],
 				},
 			},
@@ -45,8 +43,8 @@ func TestGithubGetPullRequests(t *testing.T) {
 	res := httptest.NewRecorder()
 	ctx, _ := gin.CreateTestContext(res)
 	ctx.Params = []gin.Param{
-		gin.Param{Key: "owner", Value: "octocat"},
-		gin.Param{Key: "repo", Value: "hello-world"},
+		{Key: "owner", Value: "octocat"},
+		{Key: "repo", Value: "hello-world"},
 	}
 
 	GetPullRequests(ctx)
@@ -61,4 +59,55 @@ func TestGithubGetPullRequests(t *testing.T) {
 	assert.Contains(t, string(body), expectedTitles[0])
 	assert.NotContains(t, string(body), closedPullRequestTitle[1])
 	assert.Contains(t, string(body), expectedTitles[1])
+}
+
+func TestGithubGetPullRequestsPaginated(t *testing.T) {
+	expectedTitles := []string{
+		"PR number one - first page",
+		"PR number two - first page",
+		"PR number three - second page",
+	}
+	mockedHTTPClient := mock.NewMockedHTTPClient(
+		mock.WithRequestMatchPages(
+			// Mock completely overrides `PullRequestListOptions` so any additional args, such as `State` will disappear
+			mock.GetReposPullsByOwnerByRepo,
+			[]github.PullRequest{
+				{
+					Title: &expectedTitles[0],
+				},
+				{
+					Title: &expectedTitles[1],
+				},
+			},
+			[]github.PullRequest{
+				{
+					Title: &expectedTitles[2],
+				},
+			},
+		),
+	)
+	client := github.NewClient(mockedHTTPClient)
+	config.Config.GitHubClient = client
+
+	gin.SetMode(gin.TestMode)
+	res := httptest.NewRecorder()
+	ctx, _ := gin.CreateTestContext(res)
+	ctx.Params = []gin.Param{
+		{Key: "owner", Value: "octocat"},
+		{Key: "repo", Value: "hello-world"},
+		{Key: "page", Value: "2"},
+	}
+
+	GetPullRequestsPaginated(ctx)
+
+	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		println(err)
+	}
+
+	assert.Equal(t, 200, res.Code)
+	assert.Contains(t, string(body), expectedTitles[0])
+	assert.Contains(t, string(body), expectedTitles[1])
+	assert.Contains(t, string(body), expectedTitles[2])
 }

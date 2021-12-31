@@ -3,7 +3,6 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -x
 
 # Enable C code, as it is needed for SQLite3 database binary
 # Enable go modules

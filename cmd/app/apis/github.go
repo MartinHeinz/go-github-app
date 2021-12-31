@@ -30,14 +30,12 @@ func GetPullRequests(c *gin.Context) {
 	}
 }
 
-// TODO Test
 func GetPullRequestsPaginated(c *gin.Context) {
 	owner := c.Param("owner")
 	repo := c.Param("repo")
 	pageSize, _ := strconv.ParseInt(c.Param("page"), 10, 32)
 
 	options := &github.PullRequestListOptions{
-		State:       "open",
 		ListOptions: github.ListOptions{PerPage: int(pageSize)},
 	}
 	var allPullRequests []*github.PullRequest
