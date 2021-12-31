@@ -11,6 +11,7 @@ jobs:
         uses: actions/setup-go@v2
       - name: Run Makefile build for Development
         run: |
+          ./reports.sh
           export GO111MODULE=on
           go mod vendor
           make build
