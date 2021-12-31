@@ -15,7 +15,7 @@ TARGETS=$(for d in "$@"; do echo ./$d/...; done)
 
 # Run tests and generate reports in JSON format, then copy them to path/file expected CodeClimate and SonarCloud
 echo "Running tests and Generating reports..."
-go test -tags live -coverprofile=/reports/coverage.out -installsuffix "static" ${TARGETS} -json > /reports/test-report.out
+go test -coverprofile=/reports/coverage.out -installsuffix "static" ${TARGETS} -json > /reports/test-report.out
 echo
 
 # Check coverage using test report from previous step
