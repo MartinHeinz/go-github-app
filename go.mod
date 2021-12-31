@@ -6,6 +6,7 @@ require (
 	github.com/bradleyfalzon/ghinstallation/v2 v2.0.3
 	github.com/gin-gonic/gin v1.7.7
 	github.com/google/go-github/v41 v41.0.0
+	github.com/migueleliasweb/go-github-mock v0.0.5
 	github.com/spf13/viper v1.10.1
 	github.com/stretchr/testify v1.7.0
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
@@ -28,8 +29,10 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang-jwt/jwt/v4 v4.0.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/google/go-github/v37 v37.0.0 // indirect
 	github.com/google/go-github/v39 v39.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect

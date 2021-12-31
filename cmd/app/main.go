@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/MartinHeinz/go-github-app/cmd/app/apis"
 	"github.com/MartinHeinz/go-github-app/cmd/app/config"
 	"github.com/MartinHeinz/go-github-app/cmd/app/utils"
 	"github.com/MartinHeinz/go-github-app/cmd/app/webhooks"
@@ -32,6 +33,7 @@ func main() {
 	v1 := r.Group("/api/v1")
 	{
 		v1.POST("/github/payload", webhooks.ConsumeEvent)
+		v1.GET("/github/pullrequests/:owner/:repo", apis.GetPullRequests)
 	}
 
 	utils.InitGitHubClient()
