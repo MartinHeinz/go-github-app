@@ -4,7 +4,7 @@
 BIN := app
 
 # Where to push the docker image.
-REGISTRY ?= ghcr.io/martinheinz/go-github-app
+REGISTRY ?= ghcr.io/test/go-github-app
 
 # This version-strategy uses git tags to set the version string
 VERSION := $(shell git describe --tags --always --dirty)

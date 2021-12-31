@@ -10,7 +10,7 @@ import (
 
 func InitGitHubClient() {
 	tr := http.DefaultTransport
-	itr, err := ghinstallation.NewKeyFromFile(tr, APP_ID, INSTALLATION_ID, "/config/github-app.pem")
+	itr, err := ghinstallation.NewKeyFromFile(tr, 12345, 123456789, "/config/github-app.pem")
 
 	if err != nil {
 		log.Fatal(err)
