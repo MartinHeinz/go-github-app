@@ -31,4 +31,4 @@ jobs:
         with:
           coverageCommand: make ci
           coverageLocations: |
-            ${{github.workspace}}/coverage.out:gocov
+            ${{github.workspace}}/reports/coverage.out:gocov
