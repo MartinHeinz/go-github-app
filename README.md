@@ -2,6 +2,7 @@
 
 [![Build, Test and Lint Action](https://github.com/MartinHeinz/go-github-app/workflows/Build,%20Test,%20Lint/badge.svg)](https://github.com/MartinHeinz/go-github-app/workflows/Build,%20Test,%20Lint/badge.svg)
 [![Release Action](https://github.com/MartinHeinz/go-github-app/workflows/Release/badge.svg)](https://github.com/https://github.com/MartinHeinz/go-github-app/workflows/Release/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MartinHeinz_go-github-app&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MartinHeinz_go-github-app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/05a671e6cc9b25ddd1e5/maintainability)](https://codeclimate.com/github/MartinHeinz/go-github-app/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/05a671e6cc9b25ddd1e5/test_coverage)](https://codeclimate.com/github/MartinHeinz/go-github-app/test_coverage)
 [![Go Report Card](https://goreportcard.com/badge/github.com/MartinHeinz/go-github-app)](https://goreportcard.com/report/github.com/MartinHeinz/go-github-app)
