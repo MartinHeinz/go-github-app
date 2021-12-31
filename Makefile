@@ -188,7 +188,6 @@ ci: $(BUILD_DIRS)
 	    -v $$(pwd)/reports:/reports                             \
 	    -v $$(pwd)/config:/config                               \
 	    -v $$(pwd)/cmd/app/test_data:/test_data                 \
-	    -v $$(pwd)/:/coverage                                   \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
 	    $(TEST_IMAGE)                                           \
