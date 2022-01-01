@@ -16,9 +16,9 @@ type Event string
 
 const (
 	Install     Event = "installation"
-	Ping              = "ping"
-	Push              = "push"
-	PullRequest       = "pull_request"
+	Ping        Event = "ping"
+	Push        Event = "push"
+	PullRequest Event = "pull_request"
 )
 
 var Events = []Event{
@@ -29,10 +29,10 @@ var Events = []Event{
 }
 
 var Consumers = map[string]func(EventPayload) error{
-	string(Install): consumeInstallEvent,
-	Ping:            consumePingEvent,
-	Push:            consumePushEvent,
-	PullRequest:     consumePullRequestEvent,
+	string(Install):     consumeInstallEvent,
+	string(Ping):        consumePingEvent,
+	string(Push):        consumePushEvent,
+	string(PullRequest): consumePullRequestEvent,
 }
 
 func VerifySignature(payload []byte, signature string) bool {
@@ -41,10 +41,7 @@ func VerifySignature(payload []byte, signature string) bool {
 	computedSignature := "sha256=" + hex.EncodeToString(key.Sum(nil))
 	log.Printf("computed signature: %s", computedSignature)
 
-	if computedSignature != signature {
-		return false
-	}
-	return true
+	return computedSignature == signature
 }
 
 func ConsumeEvent(c *gin.Context) {
