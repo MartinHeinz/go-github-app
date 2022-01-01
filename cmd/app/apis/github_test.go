@@ -7,6 +7,7 @@ import (
 	"github.com/migueleliasweb/go-github-mock/src/mock"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 )
@@ -59,6 +60,35 @@ func TestGithubGetPullRequests(t *testing.T) {
 	assert.Contains(t, string(body), expectedTitles[0])
 	assert.NotContains(t, string(body), closedPullRequestTitle[1])
 	assert.Contains(t, string(body), expectedTitles[1])
+}
+
+func TestGithubGetPullRequests_Error(t *testing.T) {
+	mockedHTTPClient := mock.NewMockedHTTPClient(
+		mock.WithRequestMatchHandler(
+			mock.GetReposPullsByOwnerByRepo,
+			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				mock.WriteError(
+					w,
+					http.StatusInternalServerError,
+					"GitHub downtime...",
+				)
+			}),
+		),
+	)
+	client := github.NewClient(mockedHTTPClient)
+	config.Config.GitHubClient = client
+
+	gin.SetMode(gin.TestMode)
+	res := httptest.NewRecorder()
+	ctx, _ := gin.CreateTestContext(res)
+	ctx.Params = []gin.Param{
+		{Key: "owner", Value: "octocat"},
+		{Key: "repo", Value: "hello-world"},
+	}
+
+	GetPullRequests(ctx)
+
+	assert.Equal(t, http.StatusInternalServerError, res.Code)
 }
 
 func TestGithubGetPullRequestsPaginated(t *testing.T) {
