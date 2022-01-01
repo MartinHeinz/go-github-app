@@ -201,6 +201,14 @@ ci: $(BUILD_DIRS)
 $(BUILD_DIRS):
 	@mkdir -p $@
 
+run:
+	@docker run                                                 \
+		--rm                                                    \
+		--name go-github-app                                    \
+		-v $$(pwd)/config:/config                               \
+		-p 8080:8080                                            \
+		$(IMAGE):$(TAG)
+
 clean: container-clean bin-clean
 
 container-clean:

@@ -17,8 +17,8 @@ func GetPullRequests(c *gin.Context) {
 	if pullRequests, resp, err := config.Config.GitHubClient.PullRequests.List(c, owner, repo, &github.PullRequestListOptions{
 		State: "open",
 	}); err != nil {
-		c.AbortWithStatus(resp.StatusCode)
 		log.Println(err)
+		c.AbortWithStatus(resp.StatusCode)
 	} else {
 		var pullRequestTitles []string
 		for _, pr := range pullRequests {
