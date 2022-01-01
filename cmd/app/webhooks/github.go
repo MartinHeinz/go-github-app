@@ -54,10 +54,8 @@ func ConsumeEvent(c *gin.Context) {
 
 	event := c.GetHeader("X-GitHub-Event")
 
-	found := false
 	for _, e := range Events {
 		if string(e) == event {
-			found = true
 			log.Printf("consuming event: %s", e)
 			var p EventPayload
 			json.Unmarshal(payload, &p)
@@ -71,14 +69,8 @@ func ConsumeEvent(c *gin.Context) {
 			return
 		}
 	}
-	if !found {
-		log.Printf("Unsupported event: %s", event)
-		c.AbortWithStatus(http.StatusNotImplemented)
-		return
-	}
-	// Otherwise...
-	// Add some error into response payload
-	c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"reason": "some error..."})
+	log.Printf("Unsupported event: %s", event)
+	c.AbortWithStatusJSON(http.StatusNotImplemented, gin.H{"reason": "Unsupported event: " + event})
 }
 
 func consumeInstallEvent(payload EventPayload) error {
