@@ -11,7 +11,7 @@
 
 You can find more information about this project/repository and how to use it in following blog post:
 
-- _Soon..._
+[Building GitHub Apps with Golang](https://martinheinz.dev/blog/65)
 
 ## Quick Start
 
