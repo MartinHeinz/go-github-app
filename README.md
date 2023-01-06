@@ -7,6 +7,12 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/05a671e6cc9b25ddd1e5/test_coverage)](https://codeclimate.com/github/MartinHeinz/go-github-app/test_coverage)
 [![Go Report Card](https://goreportcard.com/badge/github.com/MartinHeinz/go-github-app)](https://goreportcard.com/report/github.com/MartinHeinz/go-github-app)
 
+--------------
+
+If you find this useful, you can support me on Ko-Fi (Donations are always appreciated, but never required):
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K6F4XN6)
+
 ## Blog Posts - More Information About This Repo
 
 You can find more information about this project/repository and how to use it in following blog post:
